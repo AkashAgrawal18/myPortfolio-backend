@@ -122,9 +122,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: true,
-            'access-control-expose-headers': 'Set-Cookie',
-            'Access-Control-Allow-Credentials': true
+            secure: true
         }
 
         return res
