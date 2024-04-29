@@ -5,8 +5,12 @@ import cookieParser from "cookie-parser"
 const app = express()
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true
+    // origin: process.env.CORS_ORIGIN,
+    // credentials: true
+    origin: ["https://my-portfolio-henna-five-37.vercel.app/"],
+    methods: ["GET", "POST", "PUT", "PATCH","DELETE"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
 }))
 
 app.use(express.json({limit: "16kb"}))
