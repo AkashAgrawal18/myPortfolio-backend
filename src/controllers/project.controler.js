@@ -185,14 +185,14 @@ const updateProject = asyncHandler(async (req, res) => {
 
 const deleteProject = asyncHandler(async (req, res) => {
     try {
-        const { projectId } = req.body
+        const { Id } = req.query
 
-        if (!projectId?.trim()) {
-            throw new ApiError(400, "Project Id is missing")
+        if (!Id?.trim()) {
+            throw new ApiError(400, "Id is missing")
         }
 
         // console.log(projectId);
-        const deleteProject = await Project.deleteOne({ _id: projectId })
+        const deleteProject = await Project.deleteOne({ _id: Id })
 
         if (deleteProject) {
             return res.status(201).json(
