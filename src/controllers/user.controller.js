@@ -329,8 +329,11 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
         const userAvatar = await User.findById(req.user?._id).select("avatar");
         // console.log(userAvatar.avatar);
         if (userAvatar.avatar && userAvatar.avatar != '') {
-            fs.unlinkSync(`public/userImage/${userAvatar.avatar}`);
+            if (fs.existsSync(`public/userImage/${userAvatar.avatar}`)) {
+                fs.unlinkSync(`public/userImage/${userAvatar.avatar}`);
+            }
         }
+
         //TODO: delete old image - assignment
 
 
@@ -367,7 +370,9 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
         const userCoverImage = await User.findById(req.user?._id).select("coverImage");
 
         if (userCoverImage.coverImage && userCoverImage.coverImage != '') {
-            fs.unlinkSync(`public/userImage/${userCoverImage.coverImage}`);
+            if (fs.existsSync(`public/userImage/${userCoverImage.coverImage}`)) {
+                fs.unlinkSync(`public/userImage/${userCoverImage.coverImage}`);
+            }
         }
 
         const user = await User.findByIdAndUpdate(

@@ -156,7 +156,9 @@ const updateProject = asyncHandler(async (req, res) => {
 
         const projectFile = await Project.findById(Id).select("coverImage");
         if (projectFile.coverImage && projectFile.coverImage != '') {
-            fs.unlinkSync(`public/projectImage/${projectFile.coverImage}`);
+            if (fs.existsSync(`public/projectImage/${projectFile.coverImage}`)) {
+                fs.unlinkSync(`public/projectImage/${projectFile.coverImage}`);
+            }
         }
 
         const project = await Project.findByIdAndUpdate(
